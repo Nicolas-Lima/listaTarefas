@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 8083
 // Config
 
     // Template engine
-    
+
     app.engine("handlebars", engine({defaultLayout: "main"}))
     app.set("view engine", "handlebars")
 
@@ -38,7 +38,7 @@ app.post("/post", (req, res) => {
     const dataDividida = req.body.dataLimite.split("-")
     const dia = dataDividida[2]
     const mes = dataDividida[1]
-    const ano = dataDividida[1]
+    const ano = dataDividida[0]
     const dataFormatada = `${dia}-${mes}-${ano}`
 
     tarefas["tarefas"].push({
