@@ -1,5 +1,3 @@
-<title>Inicio</title>
-
 {{#if hasTask}}
 <div class="container-fluid d-none mb-5" id="divAdicionarTarefa">
 {{else}}
@@ -27,7 +25,7 @@
 				<div class="form-group">
 					 
 					<label for="dataLimite">
-						Data limite da tarefa
+						Data limite para a conclusão da tarefa
 					</label>
 					<input type="date" class="form-control" name="dataLimite" id="dataLimiteTarefa" required />
 				</div>
@@ -57,7 +55,7 @@
                     {{descricao}}
                 </p>
                 <p>
-                    <span class="text-danger">Data limite para conclusão da tarefa: {{dataLimite}}</span>
+                    <span class="text-danger">Data limite para a conclusão da tarefa: {{dataLimite}}</span>
                 </p>
                 <p>
                     <form action="/concluir" method="POST" class="d-inline me-3">
