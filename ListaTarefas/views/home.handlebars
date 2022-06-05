@@ -1,0 +1,112 @@
+<title>Inicio</title>
+
+{{#if hasTask}}
+<div class="container-fluid d-none mb-5" id="divAdicionarTarefa">
+{{else}}
+<div class="container-fluid mb-5" id="divAdicionarTarefa">
+{{/if}}
+	<div class="row justify-content-center">
+        <h1 style="text-align: center; margin-top: 35px; margin-bottom: 30px;">Adicionar tarefa</h1>
+
+		<div class="col-md-6 col-lg-5">
+			<form role="form" action="/post" method="POST" id="formTarefa">
+				<div class="form-group mb-3">
+					 
+					<label for="tituloTarefa">
+						Titulo da tarefa
+					</label>
+					<input type="text" class="form-control" name="titulo" id="tituloTarefa" required />
+				</div>
+				<div class="form-group mb-3">
+					 
+					<label for="descricaoTarefa">
+						Descrição da tarefa
+					</label>
+					<input type="text" class="form-control" name="descricao" id="descricaoTarefa" required />
+				</div>
+				<div class="form-group">
+					 
+					<label for="dataLimite">
+						Data limite da tarefa
+					</label>
+					<input type="date" class="form-control" name="dataLimite" id="dataLimiteTarefa" required />
+				</div>
+				<button type="submit" class="btn btn-primary mt-3">
+					Enviar tarefa
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid" id="divTarefas">
+    {{#if hasTask}}
+        <button class="btn btn-primary btn-large mb-4 mb-sm-0 mt-4 ms-2 ms-md-3 w-auto d-flex justify-content-end" id="btnAdicionarTarefa">Adicionar Tarefa</button>
+        <h1 class="text-center mb-4 mt-4 mt-sm-3 mt-md-0">Tarefas</h1>
+    {{/if}}
+
+    <div class="row">
+{{#each tarefas}}
+    {{#if pending}}
+        <div class="col-md-12 mx-0 mx-sm-3 mb-4" id="tarefa-{{id}}">
+            <div class="jumbotron">
+                <h2>
+                    {{titulo}}
+                </h2>
+                <p>
+                    {{descricao}}
+                </p>
+                <p>
+                    <span class="text-danger">Data limite para conclusão da tarefa: {{dataLimite}}</span>
+                </p>
+                <p>
+                    <form action="/concluir" method="POST" class="d-inline me-3">
+                        <input type="hidden" name="ID" value="{{id}}">
+                        <button class="btn btn-success btn-large">Concluir Tarefa</button>
+                    </form>
+
+                    <form action="/deletar" method="POST" class="d-inline">
+                        <input type="hidden" name="ID" value="{{id}}">
+                        <button class="btn btn-danger btn-large">Deletar Tarefa</button>
+                    </form>
+                </p>
+            </div>
+        </div>
+    {{/if}}
+{{/each}}
+
+{{#each tarefas}}
+    {{#if concluded}}
+        <div class="col-md-12 mx-3 mb-4" id="tarefa-{{id}}">
+            <div class="jumbotron">
+                <h2>
+                    {{titulo}}
+                </h2>
+                <p>
+                    {{descricao}}
+                </p>
+                <p>
+                    <span class="text-success">Tarefa concluída</span>
+                </p>
+                <p>
+                    <form action="/deletar" method="POST" class="d-inline">
+                        <input type="hidden" name="ID" value="{{id}}">
+                        <button class="btn btn-danger btn-large">Deletar Tarefa</button>
+                    </form>
+                </p>
+            </div>
+        </div>
+    {{/if}}
+{{/each}}
+
+    </div>
+</div>
+
+<script>
+    const btnAdicionarTarefa = document.getElementById("btnAdicionarTarefa")
+    btnAdicionarTarefa.onclick = () => {
+        const divAdicionarTarefa = document.getElementById("divAdicionarTarefa")
+        divAdicionarTarefa.classList.toggle("d-none")
+        btnAdicionarTarefa.classList.add("d-none")
+    }
+</script>   
