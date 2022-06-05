@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 8083
 // Rotas
 
 app.get("/", (req, res) => {
-    res.render("home", {tarefas: tarefas.tarefas, hasTask: tarefas.hasTask, ip: req.ip.split(":")})
+    res.render("home", {tarefas: tarefas.tarefas, hasTask: tarefas.hasTaskz})
 })
 
 app.post("/post", (req, res) => {
